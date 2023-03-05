@@ -1,5 +1,4 @@
 import com.jcraft.jsch.*;
-
 import javax.swing.*;
 import java.io.ByteArrayOutputStream;
 
@@ -13,6 +12,14 @@ public class SSHHandler {
     private String ip = "";
     private int port = -1;
 
+    /**
+     * Sets the credentials for the SSH connection.
+     * Called by <c>Start.goButton</c>'s <c>ActionListener</c>.
+     * @param _username username for ssh account
+     * @param _password password for ssh account
+     * @param _ip ip of host
+     * @param _portStr port the ssh server is hosted on
+     */
     public void setCredentials(String _username, String _password, String _ip, String _portStr) {
         username = _username;
         password = _password;
@@ -20,15 +27,26 @@ public class SSHHandler {
         port = MainFrame.tryParse(_portStr, 22);
     }
 
+    /**
+     * Creates and runs a new <c>Thread</c> that runs the given command using
+     * <c>establishConnection</c>. If any credentials have not been set, the <C>Thread</C>
+     * creation fails.
+     * @param command command to run
+     */
     public void runSSH(String command) {
         // We want a new thread so that it doesn't clog main
         if (username.equals("") || password.equals("") || ip.equals("") || port == -1) {
             JOptionPane.showMessageDialog(null, "It seems your credentials may be off. Try again.");
         }
-        System.out.println(ip);
         new Thread(() -> establishConnection(command)).start();
     }
 
+    // TODO: CHANGE TO shell AT SOME POINT
+
+    /**
+     * Connects to the SSH server and runs the given command.
+     * @param command command to run
+     */
     public void establishConnection(String command) {
         Session session = null;
         ChannelExec channel = null;
@@ -72,6 +90,10 @@ public class SSHHandler {
         }
     }
 
+    /**
+     * Sets output panel.
+     * @param op reference to output panel
+     */
     public void setOutputPanel(OutputPanel op) {
         outputPanel = op;
     }
