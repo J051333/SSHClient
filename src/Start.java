@@ -1,27 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Start extends JFrame {
-    JPanel p;
     JTextField username;
     JPasswordField password;
     JTextField ip;
     JTextField port;
     JButton openSession;
+
     public static void main(String[] args) {
         Start start = new Start();
         start.setDefaultCloseOperation(EXIT_ON_CLOSE);
         JPanel p = new JPanel(new GraphPaperLayout(new Dimension(4, 5)));
 
         start.openSession = new JButton("START");
-        start.openSession.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new MainFrame(start.username.getText(), String.valueOf(start.password.getPassword()), start.ip.getText(), start.port.getText());
-            }
-        });
+        start.openSession.addActionListener(e -> new MainFrame(start.username.getText(), String.valueOf(start.password.getPassword()), start.ip.getText(), start.port.getText()));
 
         start.username = new JTextField();
         start.password = new JPasswordField();

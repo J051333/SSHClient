@@ -1,14 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.IOException;
 
 public class MainFrame extends JFrame {
     private InputPanel inputPanel;
     private OutputPanel outputPanel;
     private JPanel panel;
-    public Process powershell;
 
     public MainFrame(String _username, String _password, String _ip, String _portStr) {
         initializeSSHWindow();
@@ -30,14 +26,6 @@ public class MainFrame extends JFrame {
         panel.add(outputPanel);
 
         setVisible(true);
-    }
-
-    public void execute(String command) {
-        try {
-            powershell = Runtime.getRuntime().exec("powershell.exe -c " + command);
-        } catch (IOException e) {
-            System.out.println("ERROR");
-        }
     }
 
     public static int tryParse(String val, int def) {
