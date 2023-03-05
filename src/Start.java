@@ -11,7 +11,9 @@ public class Start extends JFrame {
     public static void main(String[] args) {
         Start start = new Start();
         start.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        JPanel p = new JPanel(new GraphPaperLayout(new Dimension(4, 5)));
+        GraphPaperLayout layout = new GraphPaperLayout(new Dimension(4, 5));
+
+        JPanel p = new JPanel(layout);
 
         start.openSession = new JButton("START");
         start.openSession.addActionListener(e -> new MainFrame(start.username.getText(), String.valueOf(start.password.getPassword()), start.ip.getText(), start.port.getText()));
@@ -30,6 +32,8 @@ public class Start extends JFrame {
         p.add(new JLabel("Port: "), new Rectangle(0, 3, 1, 1));
         p.add(start.port, new Rectangle(1, 3, 3, 1));
         p.add(start.openSession, new Rectangle(0, 4, 4, 1));
+
+        p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "SSH Client Login"));
 
 
         start.add(p);

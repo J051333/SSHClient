@@ -13,7 +13,9 @@ public class MainFrame extends JFrame {
     }
 
     private void initializeSSHWindow() {
-        setDefaultCloseOperation(EXIT_ON_CLOSE); // when this window is closed, the process will end
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        // when this window is closed, a new ssh connection can be
+        // opened through the MainFrame
 
         setSize(1000, 500);
 

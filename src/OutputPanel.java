@@ -8,6 +8,8 @@ public class OutputPanel extends JScrollPane {
     private LinkedList<String> output;
 
     public OutputPanel() {
+        setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "Connection Output"));
+
         output = new LinkedList<>();
         outputFeed = new JLabel("");
         outputFeed.setVerticalAlignment(JLabel.TOP);
